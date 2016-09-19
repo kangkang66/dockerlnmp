@@ -1,0 +1,47 @@
+version: '2'
+services:
+    nginx:
+        image: nginx:latest
+        ports:
+            - "80:80"
+        volumes:
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+            - ./nginx/conf.d:/etc/nginx/conf.d:ro
+            - ./site:/usr/share/nginx/html:ro
+        networks:
+            - frontend
+        depends_on:
+            - php
+    php:
+        build: ./php/.
+        volumes:
+            - ./php/php.conf:/usr/local/etc/php/conf.d/php.conf:ro
+            - ./site:/usr/share/nginx/html:ro
+        networks:
+            - frontend
+            - backend
+        depends_on:
+            - mysql
+    mysql:
+        image: mysql:latest
+        ports:
+            - "3306:3306"
+        volumes:
+            - ./mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
+            - ./mysql/data:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: 123456
+        networks:
+            - backend
+    redis:
+        image: redis
+        ports:
+            - "6379:6379"
+        volumes:
+            - ./redis/data:/data
+volumes:
+    mysql-data: {}
+
+networks:
+    frontend:
+    backend:
