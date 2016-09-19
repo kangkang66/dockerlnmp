@@ -1,2 +1,4 @@
 mysql/data/*
 redis/data/*
+site/*
+!site/index.php
