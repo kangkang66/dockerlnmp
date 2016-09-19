@@ -32,4 +32,4 @@ RUN set -xe \
         $buildDeps \
     && rm -rf /var/cache/apt/* \
     && rm -rf /var/lib/apt/lists/*
-RUN php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php && php composer-setup.php && php -r "unlink('composer-setup.php');" && mv composer.phar /usr/bin/composer
+# RUN php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php && php composer-setup.php && php -r "unlink('composer-setup.php');" && mv composer.phar /usr/bin/composer
