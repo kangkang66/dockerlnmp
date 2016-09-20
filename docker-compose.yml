@@ -5,9 +5,9 @@ services:
         ports:
             - "80:80"
         volumes:
-            - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-            - ./nginx/conf.d:/etc/nginx/conf.d:ro
-            - ./site:/usr/share/nginx/html:ro
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./nginx/conf.d:/etc/nginx/conf.d
+            - ./site:/usr/share/nginx/html
         networks:
             - frontend
         depends_on:
@@ -15,8 +15,8 @@ services:
     php:
         build: ./php/.
         volumes:
-            - ./php/php.conf:/usr/local/etc/php/conf.d/php.conf:ro
-            - ./site:/usr/share/nginx/html:ro
+            - ./php/php.conf:/usr/local/etc/php/conf.d/php.conf
+            - ./site:/usr/share/nginx/html
         networks:
             - frontend
             - backend
@@ -27,7 +27,7 @@ services:
         ports:
             - "3306:3306"
         volumes:
-            - ./mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
+            - ./mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
             - ./mysql/data:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: 123456
