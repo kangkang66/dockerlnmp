@@ -20,6 +20,9 @@ services:
         networks:
             - frontend
             - backend
+        links:
+            - mysql:mysql
+            - redis:redis
         depends_on:
             - mysql
     mysql:
