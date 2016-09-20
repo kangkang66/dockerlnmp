@@ -20,9 +20,6 @@ services:
         networks:
             - frontend
             - backend
-        links:
-            - mysql:mysql
-            - redis:redis
         depends_on:
             - mysql
     mysql:
@@ -42,6 +39,8 @@ services:
             - "6379:6379"
         volumes:
             - ./redis/data:/data
+        networks:
+            - backend
 volumes:
     mysql-data: {}
 
