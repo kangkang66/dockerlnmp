@@ -1,18 +1,21 @@
 version: '2'
 services:
     nginx:
-        image: nginx:latest
+        image: kang/openresty:0.1
+        build: ./nginx/.
         ports:
             - "80:80"
         volumes:
-            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-            - ./nginx/conf.d:/etc/nginx/conf.d
+            - ./nginx/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+            - ./nginx/conf.d:/usr/local/openresty/nginx/conf/conf.d
+            - ./nginx/lua:/usr/local/openresty/nginx/lua
             - ./site:/usr/share/nginx/html
         networks:
             - frontend
         depends_on:
             - php
     php:
+        image: dockerlnmp_php:latest
         build: ./php/.
         volumes:
             - ./php/php.conf:/usr/local/etc/php/conf.d/php.conf
